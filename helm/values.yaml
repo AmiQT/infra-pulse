@@ -1,0 +1,32 @@
+replicaCount: 2
+
+image:
+  repository: ghcr.io/amiqt/infra-pulse
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 8080
+
+ingress:
+  enabled: true
+  className: nginx
+  hosts:
+    - host: infra-pulse.local
+      paths:
+        - path: /
+          pathType: Prefix
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 256Mi
+  limits:
+    cpu: 500m
+    memory: 512Mi
+
+prometheus:
+  scrape: true
+  path: /actuator/prometheus
+  port: 8080
