@@ -1,7 +1,7 @@
 package com.amiqt.infrapulse.controller;
 
-import com.amiqt.infrapulse.model.AlertItem;
-import com.amiqt.infrapulse.model.NodeStatus;
+import com.amiqt.infrapulse.model.dto.AlertDTO;
+import com.amiqt.infrapulse.model.dto.NodeDTO;
 import com.amiqt.infrapulse.service.InfraService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,8 +37,8 @@ class InfraControllerTest {
 
     @Test
     void getNodes_ShouldReturnNodeList() throws Exception {
-        List<NodeStatus> nodes = List.of(
-                new NodeStatus("node-01", "k8s-worker-01", 10.0, 20.0, "HEALTHY", "1d")
+        List<NodeDTO> nodes = List.of(
+                new NodeDTO("node-01", "k8s-worker-01", 10.0, 20.0, "HEALTHY", "1d")
         );
         when(infraService.getAllNodes()).thenReturn(nodes);
 
@@ -50,8 +50,8 @@ class InfraControllerTest {
 
     @Test
     void getAlerts_ShouldReturnAlertList() throws Exception {
-        List<AlertItem> alerts = List.of(
-                new AlertItem("alert-001", "HIGH", "Disk full", "node-01", OffsetDateTime.now(), false)
+        List<AlertDTO> alerts = List.of(
+                new AlertDTO("alert-001", "HIGH", "Disk full", "node-01", OffsetDateTime.now(), false)
         );
         when(infraService.getActiveAlerts()).thenReturn(alerts);
 
